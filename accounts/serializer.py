@@ -1,8 +1,8 @@
 from rest_framework import serializers
+from accounts.models import FriendRequest, User
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
 
-from accounts.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -38,3 +38,10 @@ class UserSearchSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["id", "user_name", "email"]
+
+
+class FriendRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FriendRequest
+        fields = ["id", "sender", "receiver", "status", "created_at"]
+        read_only_fields = ["sender", "status", "created_at"]

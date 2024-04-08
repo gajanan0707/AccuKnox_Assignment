@@ -92,3 +92,6 @@ class FriendRequest(models.Model):
 
     class Meta:
         unique_together = ("sender", "receiver")
+
+    def __str__(self):
+        return str(self.sender)
