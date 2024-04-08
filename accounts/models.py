@@ -35,7 +35,8 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 
-# Create your models here.
+# The class `User` defines a custom user model in Django with email, username, and permission-related
+# fields.
 class User(AbstractBaseUser):
     email = models.EmailField(
         _("email address"), unique=True, db_index=True, null=False, blank=False
@@ -72,6 +73,8 @@ class User(AbstractBaseUser):
         return self.is_superuser
 
 
+# The `FriendRequest` class models a friend request between users with sender, receiver, status, and
+# creation timestamp attributes.
 class FriendRequest(models.Model):
     sender = models.ForeignKey(
         User, related_name="sent_requests", on_delete=models.CASCADE
