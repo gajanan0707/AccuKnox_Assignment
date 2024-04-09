@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: accuknox
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_HOST: db
+      DATABASE_NAME: accuknox
+      DATABASE_USER: user
+      DATABASE_PASSWORD: password
